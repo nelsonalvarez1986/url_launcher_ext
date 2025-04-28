@@ -1,14 +1,14 @@
 {
-    "manifest_version": 2,
-    "name": "Dev Projects Launcher",
-    "description": "Abre proyectos de desarrollo desde Ulauncher",
-    "icon": "images/icon.png",
-    "author": "Tu Nombre",
-    "options": {
-        "query_debounce": 0.1
-    },
-    "preferences": [
-        {
+  "required_api_version": "^2.0.0",
+  "name": "Dev Projects Launcher",
+  "description": "Abre proyectos de desarrollo desde Ulauncher",
+  "developer_name": "Nelson Gabriel Alvarez",
+  "icon": "images/icon.png",
+  "options": {
+    "query_debounce": 0.05
+  },
+  "preferences": [
+         {
             "id": "base_path",
             "type": "input",
             "name": "Ruta base de GitLab",
@@ -22,19 +22,5 @@
             "description": "Ruta completa al ejecutable del editor (ej: ~/apps/cursor/Cursor.AppImage)",
             "default_value": "~/apps/cursor/Cursor.AppImage"
         }
-    ],
-    "keyword": "dev ",
-    "launch_types": ["keyword"],
-    "modes": [
-        {
-            "name": "default",
-            "label": "Abrir Proyecto",
-            "keyword": "dev "
-        }
-    ],
-    "required_api_version": "2.0.0",
-    "api_version": "2.0.0",
-    "main": "main.py",
-    "developer_name": "Neku2010",
-    "website": "https://github.com/nelsonalvarez1986/url_launcher_ext"
+  ]
 }
