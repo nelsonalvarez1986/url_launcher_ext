@@ -1,5 +1,5 @@
 {
-    "manifest_version": "2.0.0",
+    "manifest_version": 2,
     "name": "Dev Projects Launcher",
     "description": "Abre proyectos de desarrollo desde Ulauncher",
     "icon": "images/icon.png",
@@ -23,16 +23,18 @@
             "default_value": "~/apps/cursor/Cursor.AppImage"
         }
     ],
-    "keywords": [
+    "keyword": "dev ",
+    "launch_types": ["keyword"],
+    "modes": [
         {
-            "name": "dev",
-            "description": "Abre proyectos de desarrollo",
-            "default_value": "dev"
+            "name": "default",
+            "label": "Abrir Proyecto",
+            "keyword": "dev "
         }
     ],
     "required_api_version": "2.0.0",
     "api_version": "2.0.0",
     "main": "main.py",
-    "developer_name": "Tu Nombre",
-    "website": "https://github.com/tu-usuario/dev-projects-launcher"
-} 
+    "developer_name": "Neku2010",
+    "website": "https://github.com/nelsonalvarez1986/url_launcher_ext"
+}
