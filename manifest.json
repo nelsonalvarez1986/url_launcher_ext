@@ -22,5 +22,12 @@
             "description": "Ruta completa al ejecutable del editor (ej: ~/apps/cursor/Cursor.AppImage)",
             "default_value": "~/apps/cursor/Cursor.AppImage"
         }
+    ],
+    "keywords": [
+        {
+            "name": "dev",
+            "description": "Abre proyectos de desarrollo",
+            "default_value": "dev"
+        }
     ]
 } 
