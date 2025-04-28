@@ -1,0 +1,26 @@
+{
+    "manifest_version": "2.0.0",
+    "name": "Dev Projects Launcher",
+    "description": "Abre proyectos de desarrollo desde Ulauncher",
+    "icon": "images/icon.png",
+    "author": "Tu Nombre",
+    "options": {
+        "query_debounce": 0.1
+    },
+    "preferences": [
+        {
+            "id": "base_path",
+            "type": "input",
+            "name": "Ruta base de GitLab",
+            "description": "Ruta donde se encuentran los proyectos de GitLab",
+            "default_value": "~/gitlab"
+        },
+        {
+            "id": "editor_path",
+            "type": "input",
+            "name": "Ruta del editor",
+            "description": "Ruta completa al ejecutable del editor (ej: ~/apps/cursor/Cursor.AppImage)",
+            "default_value": "~/apps/cursor/Cursor.AppImage"
+        }
+    ]
+} 
