@@ -1,75 +1,49 @@
-import os
-import subprocess
-from pathlib import Path
+import json
+import logging
+from time import sleep
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
-from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
+from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
+from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
-class DevProjectsExtension(Extension):
+logger = logging.getLogger(__name__)
+
+
+class DemoExtension(Extension):
+
     def __init__(self):
-        super().__init__()
+        super(DemoExtension, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
+
 class KeywordQueryEventListener(EventListener):
+
     def on_event(self, event, extension):
-        query = event.get_argument() or ""
-        base_path = extension.preferences["base_path"]
-        base_path = os.path.expanduser(base_path)
-
-        if not os.path.exists(base_path):
-            return RenderResultListAction([
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="Error: Ruta base no encontrada",
-                    description=f"La ruta {base_path} no existe",
-                    highlightable=False
-                )
-            ])
-
         items = []
-        try:
-            for item in os.listdir(base_path):
-                full_path = os.path.join(base_path, item)
-                if os.path.isdir(full_path):
-                    items.append(
-                        ExtensionResultItem(
-                            icon="images/icon.png",
-                            name=item,
-                            description=f"Abrir {item} en el editor",
-                            on_enter=RunScriptAction(
-                                f"{extension.preferences['editor_path']} {full_path}"
-                            )
-                        )
-                    )
-        except Exception as e:
-            return RenderResultListAction([
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="Error al listar directorios",
-                    description=str(e),
-                    highlightable=False
-                )
-            ])
-
-        if not items:
-            return RenderResultListAction([
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="No se encontraron proyectos",
-                    description="No hay directorios en la ruta especificada",
-                    highlightable=False
-                )
-            ])
+        logger.info('preferences %s' % json.dumps(extension.preferences))
+        for i in range(5):
+            item_name = extension.preferences['item_name']
+            data = {'new_name': '%s %s was clicked' % (item_name, i)}
+            items.append(ExtensionResultItem(icon='images/icon.png',
+                                             name='%s %s' % (item_name, i),
+                                             description='Item description %s' % i,
+                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
         return RenderResultListAction(items)
 
-class ItemEnterEventListener(EventListener):
-    def on_event(self, event, extension):
-        pass
 
-if __name__ == "__main__":
-    DevProjectsExtension().run() 
+class ItemEnterEventListener(EventListener):
+
+    def on_event(self, event, extension):
+        data = event.get_data()
+        return RenderResultListAction([ExtensionResultItem(icon='images/icon.png',
+                                                           name=data['new_name'],
+                                                           on_enter=HideWindowAction())])
+
+
+if __name__ == '__main__':
+    DemoExtension().run()

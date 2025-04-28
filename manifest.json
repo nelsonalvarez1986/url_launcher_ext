@@ -1,26 +1,32 @@
 {
   "required_api_version": "^2.0.0",
-  "name": "Dev Projects Launcher",
-  "description": "Abre proyectos de desarrollo desde Ulauncher",
-  "developer_name": "Nelson Gabriel Alvarez",
+  "name": "Demo",
+  "description": "Demo extension",
+  "developer_name": "Aleksandr Gornostal",
   "icon": "images/icon.png",
   "options": {
     "query_debounce": 0.05
   },
   "preferences": [
-         {
-            "id": "base_path",
-            "type": "input",
-            "name": "Ruta base de GitLab",
-            "description": "Ruta donde se encuentran los proyectos de GitLab",
-            "default_value": "~/gitlab"
-        },
-        {
-            "id": "editor_path",
-            "type": "input",
-            "name": "Ruta del editor",
-            "description": "Ruta completa al ejecutable del editor (ej: ~/apps/cursor/Cursor.AppImage)",
-            "default_value": "~/apps/cursor/Cursor.AppImage"
-        }
+    {
+      "id": "demo_kw",
+      "type": "keyword",
+      "name": "Demo",
+      "default_value": "dm"
+    },
+    {
+      "id": "item_name",
+      "type": "input",
+      "name": "Item name",
+      "description": "Name for each item",
+      "default_value": "Item"
+    },
+    {
+      "id": "memo",
+      "type": "text",
+      "name": "Memo",
+      "description": "Write something here",
+      "default_value": ""
+    }
   ]
 }
